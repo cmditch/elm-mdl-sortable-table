@@ -1,6 +1,6 @@
 {
     "version": "0.8.0",
-    "summary": "elm-mdl Sortable Table - Multi-column sorting",
+    "summary": "elm-mdl Sortable Table",
     "repository": "https://github.com/cmditch/elm-mdl-sortable-table.git",
     "license": "BSD3",
     "source-directories": [
