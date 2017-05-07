@@ -87,7 +87,7 @@ config model =
             , Sortable.customColumn "One Word Description" (commentField model) None
             , Sortable.customColumn "Climbed" (climbedToggle model) None
             ]
-        , customizations = myCustomizations
+        , customizations = myCustomizations model
         }
 
 
@@ -106,8 +106,8 @@ type alias Customizations data msg =
 --}
 
 
-myCustomizations : Sortable.Customizations Mountain Msg
-myCustomizations =
+myCustomizations : Model -> Sortable.Customizations Mountain Msg
+myCustomizations model =
     let
         rowColor =
             css "background-color" "aliceblue"
@@ -123,7 +123,7 @@ myCustomizations =
             [ css "width" "70%", css "margin" "0 auto" ]
 
         customHeads =
-            \headers -> Table.thead [] (List.map thHelper headers)
+            \headers -> Table.thead [] (List.map (thHelper model) headers)
     in
         { defaultCustomizations
             | tableAttrs = tableAttrs
@@ -139,11 +139,14 @@ myCustomizations =
 --}
 
 
-thHelper : ( String, Maybe Table.Order, List (Options.Property Header Msg) ) -> Html Msg
-thHelper header =
+thHelper : Model -> ( String, Maybe Table.Order, List (Options.Property Header Msg) ) -> Html Msg
+thHelper { tableState } ( name, maybeOrder, attrs ) =
     let
-        ( name, maybeOrder, attrs ) =
-            header
+        goldenRodIt =
+            if tableState.sortColumn == name then
+                [ css "color" "orange" ]
+            else
+                []
 
         orderStyle =
             case maybeOrder of
@@ -156,7 +159,7 @@ thHelper header =
                     , css "user-select" "none"
                     ]
     in
-        Table.th (orderStyle ++ attrs) [ text name ]
+        Table.th (orderStyle ++ goldenRodIt ++ attrs) [ text name ]
 
 
 tfoot : Html Msg
