@@ -1,4 +1,4 @@
-module Presidents exposing (..)
+module Fourteeners exposing (..)
 
 import Html exposing (Html, div, h1, input, text)
 import Dict exposing (Dict)
