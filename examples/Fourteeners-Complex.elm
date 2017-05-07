@@ -142,7 +142,7 @@ myCustomizations model =
 thHelper : Model -> ( String, Maybe Table.Order, List (Options.Property Header Msg) ) -> Html Msg
 thHelper { tableState } ( name, maybeOrder, attrs ) =
     let
-        goldenRodIt =
+        orangeIt =
             if tableState.sortColumn == name then
                 [ css "color" "orange" ]
             else
@@ -159,7 +159,7 @@ thHelper { tableState } ( name, maybeOrder, attrs ) =
                     , css "user-select" "none"
                     ]
     in
-        Table.th (orderStyle ++ goldenRodIt ++ attrs) [ text name ]
+        Table.th (orderStyle ++ orangeIt ++ attrs) [ text name ]
 
 
 tfoot : Html Msg
